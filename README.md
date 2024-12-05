@@ -1,13 +1,5 @@
 In this project, let's build a **Password Manager** by applying the concepts we have learned till now.
 
-### Refer to the image below:
-
-<br/>
-<div style="text-align: center;">
-    <img src="https://assets.ccbp.in/frontend/content/react-js/passowrd-manager-output-v0.gif" alt="password manager" style="max-width:70%;box-shadow:0 2.8px 2.2px rgba(0, 0, 0, 0.12)">
-</div>
-<br/>
-
 ### Design Files
 
 <details>
@@ -75,7 +67,6 @@ The app must have the following functionalities
 <summary>Image URLs</summary>
 
 - [https://assets.ccbp.in/frontend/react-js/password-manager-logo-img.png](https://assets.ccbp.in/frontend/react-js/password-manager-logo-img.png) alt should be **app logo**
-- [https://assets.ccbp.in/frontend/react-js/password-manager-sm-img.png](https://assets.ccbp.in/frontend/react-js/password-manager-sm-img.png) alt should be **password manager**
 - [https://assets.ccbp.in/frontend/react-js/password-manager-lg-img.png](https://assets.ccbp.in/frontend/react-js/password-manager-lg-img.png) alt should be **password manager**
 - [https://assets.ccbp.in/frontend/react-js/password-manager-website-img.png](https://assets.ccbp.in/frontend/react-js/password-manager-website-img.png) alt should be **website**
 - [https://assets.ccbp.in/frontend/react-js/password-manager-username-img.png](https://assets.ccbp.in/frontend/react-js/password-manager-username-img.png) alt should be **username**

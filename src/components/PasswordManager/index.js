@@ -79,11 +79,6 @@ class PasswordManager extends Component {
             />
           </div>
           <div className="card-container manager-container">
-            <img
-              src=" https://assets.ccbp.in/frontend/react-js/password-manager-sm-img.png"
-              alt="password manager"
-              className="manager-image"
-            />
             <div className="card form-container">
               <form
                 className="card-responsive"
@@ -214,14 +209,3 @@ class PasswordManager extends Component {
 }
 
 export default PasswordManager
-
-//
-//
-//  alt should be password manager
-// https://assets.ccbp.in/frontend/react-js/password-manager-website-img.png alt should be website
-//
-// https://assets.ccbp.in/frontend/react-js/password-manager-password-img.png alt should be password
-// https://assets.ccbp.in/frontend/react-js/password-manager-search-img.png alt should be search
-// https://assets.ccbp.in/frontend/react-js/no-passwords-img.png alt should be no passwords
-
-//

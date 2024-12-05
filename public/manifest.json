@@ -1,6 +1,6 @@
 {
-  "short_name": "app_short_name",
-  "name": "App_name",
+  "short_name": "Pass-MN",
+  "name": "Password-Manager",
   "icons": [
     {
       "src": "img/favicon.ico",
