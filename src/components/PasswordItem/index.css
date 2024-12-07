@@ -1,14 +1,13 @@
 .password-item {
-  display: flex;
-  align-items: center;
-  /* justify-content: space-between; */
-  border: 1px solid #7683cb;
-  border-radius: 10px;
-  color: #f8fafc;
-  padding: 10px;
-  margin-bottom: 15px;
-  margin-right: 15px;
-  width: 30%;
+  display: flex; /* Use flexbox for layout */
+  justify-content: space-between; /* Space out items */
+  align-items: center; /* Center items vertically */
+  padding: 10px; /* Add some padding */
+  border: 1px solid #ccc; /* Optional: Add a border */
+  border-radius: 5px; /* Optional: Add rounded corners */
+  margin-bottom: 10px; /* Space between items */
+  width: 100%; /* Make it take full width */
+  box-sizing: border-box; /* Include padding and border in width */
 }
 .details-container {
   margin-left: 15px;
@@ -44,6 +43,20 @@ p {
   align-items: center;
 }
 
+.copy-btn {
+  background-color: #4caf50; /* Green */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin-left: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.copy-btn:hover {
+  background-color: #45a049; /* Darker green */
+}
+
 @media screen and (min-width: 768px) {
 }
 
@@ -59,22 +72,3 @@ p {
 .stars-icon {
   max-width: 100px;
 }
-/* 
-Hex: #9ba9eb
-Hex: #c3caea
-Hex: #5763a5
-Hex: #f8fafc
-Hex: #454f84
-Hex: #0b69ff
-Hex: #94a3b8
-Hex: #b6c3ca
-Hex: #7683cb
-Hex: #f59e0b
-Hex: #10b981
-Hex: #f97316
-Hex: #14b8a6
-Hex: #b91c1c
-Hex: #ffffff
-Hex: #0ea5e9
-Hex: #64748b 
-*/
