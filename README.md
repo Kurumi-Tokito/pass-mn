@@ -1,5 +1,15 @@
 In this project, let's build a **Password Manager** by applying the concepts we have learned till now.
 
+## Docker
+```shell
+# To Build Docker Image
+docker build -t Password-Manager:1.0
+
+# To Run Docker Image
+docker run -d -p 3000:3000 Password-Manager
+```
+
+- change port maping as needed
 ### Design Files
 
 <details>
