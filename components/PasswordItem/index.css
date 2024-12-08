@@ -1,0 +1,148 @@
+.password-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 10px;
+  background-color: #454f84;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  width: 100%;
+}
+
+.password-item:hover {
+  transform: scale(1.02);
+}
+
+.circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.details-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+
+.website-text {
+  width: 100%;
+  align: center;
+  color: #f8fafc;
+  font-weight: bold;
+}
+
+.name-container {
+  display: flex;
+  align-items: center;
+}
+
+.name-label {
+  font-weight: bold;
+  margin-right: 5px;
+  color: #d3d3d3;
+}
+
+.name-text {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #d3d3d3;
+}
+
+.password-info-container {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.password-label {
+  font-weight: bold;
+  margin-right: 10px;
+  color: #d3d3d3;
+}
+
+.password-container {
+  display: flex;
+  align-items: center;
+  border: 2px solid #ccc;
+  padding: 5px;
+  margin-left: 10px;
+  border-radius: 8px;
+  background-color: #ffffff;
+}
+
+.password-text {
+  margin: 0;
+  flex-grow: 1;
+  color: #777;
+}
+
+.action-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.copy-btn {
+  background-color:  #8ccb93;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.copy-btn:hover {
+  background-color: #d95d0d;
+}
+
+.copy-btn {
+  margin-left: 10px;
+}
+
+.password-container {
+  position: relative;
+}
+
+.copied-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.6);
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #10b981;
+  font-weight: bold;
+  z-index: 1;
+}
+
+.delete-btn {
+  background: none;
+  outline: none;
+  border: none;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-icon {
+  width: 100%;
+}
+@media screen and (min-width: 768px) {
+  .delete-icon {
+    height: 20px;
+    width: 20px;
+  }
+}
