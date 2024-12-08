@@ -206,10 +206,7 @@ class PasswordManager extends Component {
                       key={eachRecord.id}
                       record={eachRecord}
                       deletePasswordRecord={this.deletePasswordRecord}
-                      password={eachRecord.password} // Pass the generated password
-                      copyToClipboard={() =>
-                        this.copyToClipboard(eachRecord.password)
-                      } // Pass the copy function
+                      password={eachRecord.password}
                     />
                   ))}
                 </ul>
