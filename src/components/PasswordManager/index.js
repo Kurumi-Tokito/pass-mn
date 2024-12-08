@@ -8,21 +8,20 @@ class PasswordManager extends Component {
     passwordRecords: [],
     inputUrl: '',
     inputName: '',
-    inputPassword: '',
+    masterPassword: '',
     searchInput: '',
-    showPassword: false,
+    feedbackMessage: '',
+    passwordLength: 16,
   }
 
   deletePasswordRecord = id => {
     const {passwordRecords} = this.state
     const filteredPasswordRecords = passwordRecords.filter(e => e.id !== id)
-
     this.setState({passwordRecords: filteredPasswordRecords})
   }
 
   getSearchRecords = () => {
     const {passwordRecords, searchInput} = this.state
-
     return passwordRecords.filter(eachRecord =>
       eachRecord.url.toLowerCase().includes(searchInput.toLowerCase()),
     )
@@ -40,33 +39,74 @@ class PasswordManager extends Component {
     this.setState({inputName: e.target.value})
   }
 
-  onInputPasswordChange = e => {
-    this.setState({inputPassword: e.target.value})
+  onMasterPasswordChange = e => {
+    this.setState({masterPassword: e.target.value})
   }
 
-  onCheckChange = () => {
-    this.setState(prevState => ({showPassword: !prevState.showPassword}))
+  onPasswordLengthChange = e => {
+    this.setState({passwordLength: Number(e.target.value)})
   }
 
-  addPasswordRecord = e => {
+  generatePassword = async (url, name, masterPassword, length) => {
+    const data = `${url}:${name}:${masterPassword}`
+    const encoder = new TextEncoder()
+    const dataBuffer = encoder.encode(data)
+
+    const hashBuffer = await crypto.subtle.digest('SHA-256', dataBuffer)
+    const hashArray = new Uint8Array(hashBuffer)
+
+    let password = ''
+    for (let i = 0; i < length; i += 1) {
+      const byte = hashArray[i % hashArray.length]
+      const charCode = (byte % 94) + 33
+      password += String.fromCharCode(charCode)
+    }
+
+    return password
+  }
+
+  addPasswordRecord = async e => {
     e.preventDefault()
-    console.log('in ad ')
-    const {inputUrl, inputName, inputPassword} = this.state
+    const {inputUrl, inputName, masterPassword, passwordLength} = this.state
+
+    const newPassword = await this.generatePassword(
+      inputUrl,
+      inputName,
+      masterPassword,
+      passwordLength,
+    )
+
     const newPasswordRecord = {
       id: uuidv4(),
       url: inputUrl,
       name: inputName,
-      password: inputPassword,
+      password: newPassword, // Set the generated password
     }
+
     this.setState(prevState => ({
       passwordRecords: [...prevState.passwordRecords, newPasswordRecord],
+      inputUrl: '',
+      inputName: '',
+      masterPassword: '',
+      feedbackMessage: 'Password added successfully!', // Set feedback message
     }))
+
+    setTimeout(() => {
+      this.setState({feedbackMessage: ''}) // Clear feedback message after 2 seconds
+    }, 2000)
   }
 
   render() {
-    const {showPassword} = this.state
+    const {
+      passwordLength,
+      masterPassword,
+      feedbackMessage,
+      searchInput,
+      inputUrl,
+      inputName,
+    } = this.state
+
     const searchResults = this.getSearchRecords()
-    console.log(this.state, searchResults)
 
     return (
       <div className="app-container">
@@ -86,63 +126,60 @@ class PasswordManager extends Component {
               >
                 <h1 className="form-heading">Add New Password</h1>
                 <div className="input-container">
-                  <div className="icon-container">
-                    <img
-                      className="input-icon"
-                      src="https://assets.ccbp.in/frontend/react-js/password-manager-website-img.png"
-                      alt="website"
-                    />
-                  </div>
-
                   <input
                     className="input"
                     type="text"
                     placeholder="Enter Website"
+                    value={inputUrl} // Use destructured variable
                     onChange={this.onInputUrlChange}
                   />
                 </div>
                 <div className="input-container">
-                  <div className="icon-container">
-                    <img
-                      className="input-icon"
-                      src="https://assets.ccbp.in/frontend/react-js/password-manager-username-img.png"
-                      alt="username"
-                    />
-                  </div>
                   <input
                     className="input"
                     type="text"
                     placeholder="Enter Username"
+                    value={inputName} // Use destructured variable
                     onChange={this.onInputNameChange}
                   />
                 </div>
                 <div className="input-container">
-                  <div className="icon-container">
-                    <img
-                      className="input-icon"
-                      src="https://assets.ccbp.in/frontend/react-js/password-manager-password-img.png"
-                      alt="password"
-                    />
-                  </div>
                   <input
                     className="input"
                     type="password"
-                    placeholder="Enter Password"
-                    onChange={this.onInputPasswordChange}
+                    placeholder="Enter Master Password"
+                    value={masterPassword} // This is already destructured
+                    onChange={this.onMasterPasswordChange}
+                  />
+                </div>
+                <div className="input-container">
+                  <label htmlFor="passwordLength" className="length-label">
+                    <span className="length-value">
+                      Password Length: {passwordLength}
+                    </span>
+                  </label>
+                  <input
+                    id="passwordLength"
+                    type="range"
+                    min="8"
+                    max="64"
+                    value={passwordLength}
+                    onChange={this.onPasswordLengthChange}
+                    className="length-slider"
                   />
                 </div>
                 <div className="btn-container">
-                  <button
-                    className="add-btn"
-                    type="submit"
-                    onClick={this.addPasswordRecord}
-                  >
-                    Add
+                  <button className="add-btn" type="submit">
+                    Save
                   </button>
                 </div>
               </form>
             </div>
           </div>
+
+          {feedbackMessage && (
+            <div className="feedback-message">{feedbackMessage}</div>
+          )}
 
           <div className="card-container">
             <div className="card-responsive no-password-container">
@@ -152,33 +189,16 @@ class PasswordManager extends Component {
                   <p className="results-count"> {searchResults.length}</p>
                 </h1>
                 <div className="search-container">
-                  <div className="search-icon-container">
-                    <img
-                      src="https://assets.ccbp.in/frontend/react-js/password-manager-search-img.png"
-                      alt="search"
-                      className="search-icon"
-                    />
-                  </div>
                   <input
                     className="search-input"
                     type="search"
                     placeholder="Search"
+                    value={searchInput}
                     onChange={this.onSearchChange}
                   />
                 </div>
               </div>
               <hr className="hr-line" />
-              <div className="checkbox-container">
-                <input
-                  type="checkbox"
-                  className="checkbox-input"
-                  id="checkbox"
-                  onChange={this.onCheckChange}
-                />
-                <label htmlFor="checkbox" className="checkbox-label">
-                  Show Passwords
-                </label>
-              </div>
               {searchResults.length !== 0 ? (
                 <ul className="passwords-list-container">
                   {searchResults.map(eachRecord => (
@@ -186,7 +206,10 @@ class PasswordManager extends Component {
                       key={eachRecord.id}
                       record={eachRecord}
                       deletePasswordRecord={this.deletePasswordRecord}
-                      showPassword={showPassword}
+                      password={eachRecord.password} // Pass the generated password
+                      copyToClipboard={() =>
+                        this.copyToClipboard(eachRecord.password)
+                      } // Pass the copy function
                     />
                   ))}
                 </ul>
