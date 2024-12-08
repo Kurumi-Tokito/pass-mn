@@ -10,7 +10,8 @@ class PasswordManager extends Component {
     inputName: '',
     masterPassword: '',
     searchInput: '',
-    passwordLength: 12, // Default password length
+    feedbackMessage: '',
+    passwordLength: 16,
   };
 
   deletePasswordRecord = (id) => {
@@ -82,23 +83,16 @@ class PasswordManager extends Component {
       inputUrl: '',
       inputName: '',
       masterPassword: '',
+      feedbackMessage: 'Password added successfully!', // Set feedback message
     }));
+
+    setTimeout(() => {
+      this.setState({ feedbackMessage: '' }); // Clear feedback message after 2 seconds
+    }, 2000);
   };
 
-  copyToClipboard = (password) => {
-    if (password) {
-        navigator.clipboard.writeText(password);
-        copyButton.title = 'Password copied to clipboard!'; // Set hover message
-        setTimeout(() => {
-            copyButton.title = ''; // Clear the hover message after a short delay
-        }, 2000); // Adjust the delay as needed
-    } else {
-        messageElement.textContent = 'No password generated yet to copy.';
-    }
-};
-
   render() {
-    const { passwordLength, masterPassword } = this.state;
+    const { passwordLength, masterPassword, feedbackMessage } = this.state;
     const searchResults = this.getSearchRecords();
 
     return (
@@ -126,93 +120,97 @@ class PasswordManager extends Component {
                 </div>
                 <div className="input-container">
                   <input
-                    className="input"
-                    type="text"
-                    placeholder="Enter Username"
-                    value={this.state.inputName}
-                    onChange={this.onInputNameChange}
-                  />
-                </div>
-                <div className="input-container">
-                  <input
-                    className="input"
-                    type="password"
-                    placeholder="Enter Master Password"
-                    value={masterPassword}
-                    onChange={this.onMasterPasswordChange}
-                  />
-                </div>
-                <div className="input-container">
-                  <label htmlFor="passwordLength" className="length-label">
-                    Password Length: {passwordLength}
-                  </label>
-                  <input
-                    id="passwordLength"
-                    type="range"
-                    min="8"
-                    max="32"
-                    value={passwordLength}
-                    onChange={this.onPasswordLengthChange}
-                    className="length-slider"
-                  />
-                </div>
-                <div className="btn-container">
-                  <button
-                    className="add-btn"
-                    type="submit"
-                  >
-                    Save
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-
-          <div className="card-container">
-            <div className="card-responsive no-password-container">
-              <div className="passwords-header">
-                <h1 className="passwords-header-title">
-                  Your Passwords
-                  <p className="results-count"> {searchResults.length}</p>
-                </h1>
-                <div className="search-container">
-                  <input
-                    className="search-input"
-                    type="search"
-                    placeholder="Search"
-                    onChange={this.onSearchChange}
-                  />
-                </div>
-              </div>
-              <hr className="hr-line" />
-              {searchResults.length !== 0 ? (
-                <ul className="passwords-list-container">
-                  {searchResults.map((eachRecord) => (
-                    <PasswordItem
-                      key={eachRecord.id}
-                      record={eachRecord}
-                      deletePasswordRecord={this.deletePasswordRecord}
-                      password={eachRecord.password} // Pass the generated password
-                      copyToClipboard={() => this.copyToClipboard(eachRecord.password)} // Pass the copy function
+                      className="input"
+                      type="text"
+                      placeholder="Enter Username"
+                      value={this.state.inputName}
+                      onChange={this.onInputNameChange}
                     />
-                  ))}
-                </ul>
-              ) : (
-                <div className="no-password-container">
-                  <img
-                    src="https://assets.ccbp.in/frontend/react-js/no-passwords-img.png"
-                    alt="no passwords"
-                    className="no-passwords-image"
-                  />
-                  <p className="no-passwords-title">No Passwords</p>
+                  </div>
+                  <div className="input-container">
+                    <input
+                      className="input"
+                      type="password"
+                      placeholder="Enter Master Password"
+                      value={masterPassword}
+                      onChange={this.onMasterPasswordChange}
+                    />
+                  </div>
+                  <div className="input-container">
+                      <label htmlFor="passwordLength" className="length-label">
+                          <span className="length-value">Password Length: {passwordLength}</span>
+                      </label>
+                      <input
+                          id="passwordLength"
+                          type="range"
+                          min="8"
+                          max="64"
+                          value={passwordLength}
+                          onChange={this.onPasswordLengthChange}
+                          className="length-slider"
+                      />
+                  </div>
+                  <div className="btn-container">
+                    <button
+                      className="add-btn"
+                      type="submit"
+                    >
+                      Save
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            {feedbackMessage && (
+              <div className="feedback-message">{feedbackMessage}</div>
+            )}
+
+            <div className="card-container">
+              <div className="card-responsive no-password-container">
+                <div className="passwords-header">
+                  <h1 className="passwords-header-title">
+                    Your Passwords
+                    <p className="results-count"> {searchResults.length}</p>
+                  </h1>
+                  <div className="search-container">
+                    <input
+                      className="search-input"
+                      type="search"
+                      placeholder="Search"
+                      onChange={this.onSearchChange}
+                    />
+                  </div>
                 </div>
-              )}
+                <hr className="hr-line" />
+                {searchResults.length !== 0 ? (
+                  <ul className="passwords-list-container">
+                    {searchResults.map((eachRecord) => (
+                      <PasswordItem
+                        key={eachRecord.id}
+                        record={eachRecord}
+                        deletePasswordRecord={this.deletePasswordRecord}
+                        password={eachRecord.password} // Pass the generated password
+                        copyToClipboard={() => this.copyToClipboard(eachRecord.password)} // Pass the copy function
+                      />
+                    ))}
+                  </ul>
+                ) : (
+                  <div className="no-password-container">
+                    <img
+                      src="https://assets.ccbp.in/frontend/react-js/no-passwords-img.png"
+                      alt="no passwords"
+                      className="no-passwords-image"
+                    />
+                    <p className="no-passwords-title">No Passwords</p>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-      </div>
-    </div>
-  );
-}
+        </div>
+      );
+    }
 }
 
 export default PasswordManager;

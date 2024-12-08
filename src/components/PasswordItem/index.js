@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import './index.css';
 
 const PasswordItem = (props) => {
@@ -11,11 +12,26 @@ const PasswordItem = (props) => {
     '#0ea5e9',
   ];
   const profilePicColor = profileColors[Math.floor(Math.random() * profileColors.length)];
-  const { record, deletePasswordRecord, password, copyToClipboard } = props;
+  const { record, deletePasswordRecord, password } = props;
   const { id, url, name } = record;
+
+  const [isFlashing, setIsFlashing] = useState(false);
+  const [showCopiedMessage, setShowCopiedMessage] = useState(false);
 
   const deleteItem = () => {
     deletePasswordRecord(id);
+  };
+
+  const copyToClipboard = (password) => {
+    if (password) {
+      navigator.clipboard.writeText(password);
+      setIsFlashing(true);
+      setShowCopiedMessage(true);
+      setTimeout(() => {
+        setIsFlashing(false);
+        setShowCopiedMessage(false);
+      }, 2000);
+    }
   };
 
   return (
@@ -24,29 +40,37 @@ const PasswordItem = (props) => {
         {name.charAt(0)}
       </div>
       <div className="details-container">
-        <p className="website-text">{url}</p>
-        <p className="website-text">{name}</p>
-        <p className="website-text">Password: {password || 'Not generated yet'}</p>
+        <h2 className="website-text">{url}</h2>
+        <div className="name-container">
+          <span className="name-label">Username: {name} </span>
+        </div>
+        <div className="password-info-container">
+          <p className="password-label">Password:</p>
+          <div className={`password-container ${isFlashing ? 'flashing' : ''}`}>
+            <p className="password-text">{password || 'Not generated yet'}</p>
+            <button
+              type="button"
+              onClick={() => copyToClipboard(password)}
+              className="copy-btn"
+            >
+              Copy
+            </button>
+            {showCopiedMessage && <span className="copied-message">Copied!</span>}
+          </div>
+        </div>
       </div>
-      <div className="generate-password-container">
-        <button
+      <div className="action-buttons">
+          <button
           type="button"
           onClick={deleteItem}
           className="delete-btn"
-          testid="delete"
+          data-testid="delete"
         >
           <img
             src="https://assets.ccbp.in/frontend/react-js/password-manager-delete-img.png"
             alt="delete"
             className="delete-icon"
           />
-        </button>
-        <button
-          type="button"
-          onClick={copyToClipboard}
-          className="copy-btn"
-        >
-          Copy
         </button>
       </div>
     </li>
