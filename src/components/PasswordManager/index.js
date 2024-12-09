@@ -80,7 +80,7 @@ class PasswordManager extends Component {
       id: uuidv4(),
       url: inputUrl,
       name: inputName,
-      password: newPassword, // Set the generated password
+      password: newPassword,
     }
 
     this.setState(prevState => ({
@@ -88,11 +88,11 @@ class PasswordManager extends Component {
       inputUrl: '',
       inputName: '',
       masterPassword: '',
-      feedbackMessage: 'Password added successfully!', // Set feedback message
+      feedbackMessage: 'Password added successfully!',
     }))
 
     setTimeout(() => {
-      this.setState({feedbackMessage: ''}) // Clear feedback message after 2 seconds
+      this.setState({feedbackMessage: ''})
     }, 2000)
   }
 
@@ -130,7 +130,7 @@ class PasswordManager extends Component {
                     className="input"
                     type="text"
                     placeholder="Enter Website"
-                    value={inputUrl} // Use destructured variable
+                    value={inputUrl}
                     onChange={this.onInputUrlChange}
                   />
                 </div>
@@ -139,7 +139,7 @@ class PasswordManager extends Component {
                     className="input"
                     type="text"
                     placeholder="Enter Username"
-                    value={inputName} // Use destructured variable
+                    value={inputName}
                     onChange={this.onInputNameChange}
                   />
                 </div>
@@ -148,7 +148,7 @@ class PasswordManager extends Component {
                     className="input"
                     type="password"
                     placeholder="Enter Master Password"
-                    value={masterPassword} // This is already destructured
+                    value={masterPassword}
                     onChange={this.onMasterPasswordChange}
                   />
                 </div>

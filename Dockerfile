@@ -13,7 +13,6 @@ RUN git clone --depth=1 https://github.com/Kurumi-Tokito/pass-mn.git -b master /
 
 # Install & Build React Project
 RUN yarn install
-RUN yarn build
 
 # Expose the port
 EXPOSE 3000
