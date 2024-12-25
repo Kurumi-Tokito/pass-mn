@@ -1,20 +1,15 @@
 {
   "files": {
-    "main.css": "/pass-mn/static/css/main.db833326.chunk.css",
-    "main.js": "/pass-mn/static/js/main.e0aa46ed.chunk.js",
-    "main.js.map": "/pass-mn/static/js/main.e0aa46ed.chunk.js.map",
-    "runtime-main.js": "/pass-mn/static/js/runtime-main.6bb90299.js",
-    "runtime-main.js.map": "/pass-mn/static/js/runtime-main.6bb90299.js.map",
-    "static/js/2.07c1b5e4.chunk.js": "/pass-mn/static/js/2.07c1b5e4.chunk.js",
-    "static/js/2.07c1b5e4.chunk.js.map": "/pass-mn/static/js/2.07c1b5e4.chunk.js.map",
+    "main.css": "/pass-mn/static/css/main.0f1c1d9d.css",
+    "main.js": "/pass-mn/static/js/main.5192fc9e.js",
+    "static/js/488.30733ee5.chunk.js": "/pass-mn/static/js/488.30733ee5.chunk.js",
     "index.html": "/pass-mn/index.html",
-    "static/css/main.db833326.chunk.css.map": "/pass-mn/static/css/main.db833326.chunk.css.map",
-    "static/js/2.07c1b5e4.chunk.js.LICENSE.txt": "/pass-mn/static/js/2.07c1b5e4.chunk.js.LICENSE.txt"
+    "main.0f1c1d9d.css.map": "/pass-mn/static/css/main.0f1c1d9d.css.map",
+    "main.5192fc9e.js.map": "/pass-mn/static/js/main.5192fc9e.js.map",
+    "488.30733ee5.chunk.js.map": "/pass-mn/static/js/488.30733ee5.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.6bb90299.js",
-    "static/js/2.07c1b5e4.chunk.js",
-    "static/css/main.db833326.chunk.css",
-    "static/js/main.e0aa46ed.chunk.js"
+    "static/css/main.0f1c1d9d.css",
+    "static/js/main.5192fc9e.js"
   ]
 }
